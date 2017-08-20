@@ -3,7 +3,7 @@ var mysql_dbc = require('../config/db_con')();
 var connection = mysql_dbc.init();
 mysql_dbc.test_open(connection);
 
-function Result (resultCode, resultMessage) {
+function Result (resultCode, resultMessage, memberId, memberName) {
     this.resultCode = resultCode;
     this.resultMessage = resultMessage;
 }
@@ -16,11 +16,12 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/memberLogin.app', function(req, res, next) {
+	//http://192.168.0.155:3000/memberRegister.app?memberId=test4&memberPwd=test4
 
   var reqParam = req.query;
 
   var sqlQueryParam = [reqParam.memberId, reqParam.memberPwd];
-  var sqlQuery = 'select count(*) as count from member where member_id = ? and member_pwd = ?';
+  var sqlQuery = "select count(*) as count from member where member_id = ? and member_pwd = ? and member_delete_code='N'";
   connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
     if(err){
       res.send('error');
@@ -40,8 +41,73 @@ router.get('/memberLogin.app', function(req, res, next) {
         result.resultMessage = '회원정보가 없습니다.';
       }
       res.statusCode = "200";
-  		res.setHeader('Content-Type', 'application/json;');
-  		res.end(JSON.stringify(result, null, 3));
+  		//res.setHeader('Content-Type', 'application/json;');
+  		//res.end(JSON.stringify(result, null, 3));
+		res.json(result);
+    }
+  });
+});
+
+router.get('/cityInfo.app', function(req, res, next) {
+	//http://192.168.0.155:3000/cityInfo.app
+
+  var reqParam = req.query;
+
+  var sqlQueryParam = [reqParam.memberId, reqParam.memberPwd];
+  var sqlQuery = 'select city_geocode cityCode, city_name cityName from address_city';
+  connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
+    if(err){
+      res.send('error');
+    } else {
+
+      var result = new Result();
+
+      console.log(row);
+      console.log(row[0].count);
+
+      if(row[0].count === 1) {
+        result.resultCode = '200';
+        result.resultMessage = '로그인을 환영합니다.';
+
+      } else {
+        result.resultCode = '500';
+        result.resultMessage = '회원정보가 없습니다.';
+      }
+      res.statusCode = "200";
+  		//res.setHeader('Content-Type', 'application/json;');
+  		//res.end(JSON.stringify(result, null, 3));
+		res.json(result);
+    }
+  });
+});
+
+router.get('/stateInfo.app', function(req, res, next) {
+	//http://192.168.0.155:3000/stateInfo.app?cityCode=11
+
+  var reqParam = req.query;
+
+  var sqlQueryParam = [reqParam.memberId, reqParam.memberPwd];
+  var sqlQuery = 'select count(*) as count from member where member_id = ? and member_pwd = ?';
+  connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
+    if(err){
+      res.send('error');
+    } else {
+
+      var result = new Result();
+
+      if(row[0].count === 1) {
+        result.resultCode = '200';
+        result.resultMessage = '주소 정보가 조회 되었습니다.';
+
+      } else {
+        result.resultCode = '500';
+        result.resultMessage = '주소 정보가 존재 하지 않습니다.';
+      }
+      res.statusCode = "200";
+  		//res.setHeader('Content-Type', 'application/json;');
+  		//res.end(JSON.stringify(result, null, 3));
+		console.log(row);
+		res.json(result);
     }
   });
 });
