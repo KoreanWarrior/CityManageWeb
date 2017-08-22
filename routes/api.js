@@ -43,6 +43,8 @@ router.get('/memberLogin.app', function(req, res, next) {
       res.statusCode = "200";
   		//res.setHeader('Content-Type', 'application/json;');
   		//res.end(JSON.stringify(result, null, 3));
+		
+		//console.log(JSON.parse(result));
 		res.json(result);
     }
   });
@@ -92,13 +94,12 @@ router.get('/cityInfo.app', function(req, res, next) {
     		res.setHeader('Content-Type', 'application/json; charset=utf-8');
     		//res.end(JSON.stringify(result, null, 3));
 
-        var accountStr = '{"resultCode":"200", "resultMessage":"조회", "city":'+  JSON.stringify(row, null, 3) +'}';
+        //var accountStr = '{"resultCode":"200", "resultMessage":"조회", "city":'+  JSON.stringify(row, null, 3) +'}';
+		var accountStr = {"resultCode":"200", "resultMessage":"조회", "city":row};
 
-        var accountObj = JSON.parse(accountStr);
+        console.log(JSON.stringify(accountStr,null,3));
 
-        console.log(accountObj);
-
-		    res.json(accountObj);
+		res.json(accountStr);
     }
   });
 });
