@@ -60,23 +60,45 @@ router.get('/cityInfo.app', function(req, res, next) {
       res.send('error');
     } else {
 
-      var result = new Result();
+  		var result = new Result();
 
-      console.log(row);
-      console.log(row[0].count);
+  		result.resultCode = '500';
+          result.resultMessage = '시/도 정보 조회 실패 하였습니다.';
 
-      if(row[0].count === 1) {
-        result.resultCode = '200';
-        result.resultMessage = '로그인을 환영합니다.';
+  		console.log(row[0]);
+  		console.log(row[0].cityCode);
+  		console.log(row[0].cityName);
+  		console.log(row.length);
+  		var dataLength = row.length;
+  		var jsonArray = "";
+  		var myarray = new Array();
+  		var myJSON = "";
 
-      } else {
-        result.resultCode = '500';
-        result.resultMessage = '회원정보가 없습니다.';
-      }
-      res.statusCode = "200";
-  		//res.setHeader('Content-Type', 'application/json;');
-  		//res.end(JSON.stringify(result, null, 3));
-		res.json(result);
+      if(dataLength > 0) {
+
+
+    		for(var i =0; i < dataLength; i ++) {
+    			var item = {"cityCode": row[i].cityCode,"cityName": row[i].cityName}
+    			myarray.push(item);
+    		}
+
+  		  myJSON = JSON.stringify({resultCode:200, resultMessage:"조회끝" , city:myarray}, null, 3);
+
+        } else {
+          result.resultCode = '500';
+          result.resultMessage = '시/도 정보 조회 실패 하였습니다.';
+        }
+        res.statusCode = "200";
+    		res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    		//res.end(JSON.stringify(result, null, 3));
+
+        var accountStr = '{"resultCode":"200", "resultMessage":"조회", "city":'+  JSON.stringify(row, null, 3) +'}';
+
+        var accountObj = JSON.parse(accountStr);
+
+        console.log(accountObj);
+
+		    res.json(accountObj);
     }
   });
 });
