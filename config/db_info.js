@@ -8,7 +8,7 @@ module.exports = (function () {
       database: ''
     },
     real: { // real server db info
-      host: '192.168.0.155',
+      host: '125.128.8.113',
       port: '3306',
       user: 'citymanage',
       password: 'sjj',
