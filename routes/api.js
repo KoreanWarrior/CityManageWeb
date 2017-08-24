@@ -359,48 +359,115 @@ router.get('/pushRecordList.app', function(req, res, next) {
   });
 });
 
-router.get('/wmList.app', function(req, res, next) {
-  res.send('wmList.app');
+router.get('/sensorList.app', function(req, res, next) {
+	
+	var result = new Result();
+	var reqParam = req.query;
+	
+	var memberId = reqParam.memberId;
+	var manageType = reqParam.manageType;
+	
+	var sqlQueryParam = [memberId,manageType];
+	var sqlQuery = "select lm.manage_id,ac.city_name, ast.state_name  from member m "
+					+"join location_management lm on m.state_code=lm.state_code "
+					+"join address_city ac on m.city_code=ac.city_code "
+					+"join address_state ast on m.state_code=ast.state_code "
+					+"where m.member_id = ? and lm.manage_type=? "
+					
+	
+	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
+					
+	if(err){
+		console.log(err);
+		result.resultCode = '500';
+		result.resultMessage = '시스템 관리자에게 문의 하세요';
+		res.json(result);
+	} else {	
+		res.statusCode = "200";
+		res.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+		var resultStr = {"resultCode":"200", "resultMessage":"조회", "wmList":row};
+		res.json(resultStr);
+	}
+  });
+  
 });
 
 router.get('/wmInfo.app', function(req, res, next) {
   res.send('wmInfo.app');
 });
 
-router.get('/tmList.app', function(req, res, next) {
-  res.send('tmList.app');
-});
-
 router.get('/tmInfo.app', function(req, res, next) {
   res.send('tmInfo.app');
 });
 
-router.get('/gmList.app', function(req, res, next) {
-  res.send('gmList.app');
-});
 
 router.get('/gmInfo.app', function(req, res, next) {
   res.send('gmInfo.app');
-});
-
-router.get('/smList.app', function(req, res, next) {
-  res.send('smList.app');
 });
 
 router.get('/smInfo.app', function(req, res, next) {
   res.send('smInfo.app');
 });
 
-router.get('/smList.app', function(req, res, next) {
-  res.send('smList.app');
-});
 
 router.get('/sensorInfoRegister.app', function(req, res, next) {
-  res.send('sensorInfoRegister.app');
+	
+	var reqParam = req.query;
+
+	var sensorId = reqParam.sensorId;
+	var sensorInfo = reqParam.sensorInfo;
+
+	var sqlQueryParam = [sensorInfo,sensorId];
+	var sqlQuery = "update sensor_info set sensor_info=? where sensor_id=?"
+	
+	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
+
+	var result = new Result();
+	if(err){
+		console.log(err);
+		result.resultCode = '500';
+		result.resultMessage = '센서 정보 변경 실패';
+	} else {
+		if(row.affectedRows === 1) {
+			result.resultCode = '200';
+			result.resultMessage = '센서 정보 변경';
+		} else {
+			result.resultCode = '500';
+			result.resultMessage = '센서 정보 변경 실패';
+		}
+	}
+		res.json(result);
+	});
 });
 
 router.get('/operationStatusRegister.app', function(req, res, next) {
-  res.send('operationStatusRegister.app');
+	var reqParam = req.query;
+
+	var sensorId = reqParam.sensorId;
+	var operationStatus = reqParam.operationStatus;
+
+	var sqlQueryParam = [operationStatus,sensorId];
+	var sqlQuery = "update sensor_info set operation_status=? where sensor_id=?"
+	
+	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
+
+	var result = new Result();
+	if(err){
+		console.log(err);
+		result.resultCode = '500';
+		result.resultMessage = '센서 정보 변경 실패';
+	} else {
+		if(row.affectedRows === 1) {
+			result.resultCode = '200';
+			result.resultMessage = '센서 정보 변경';
+		} else {
+			result.resultCode = '500';
+			result.resultMessage = '센서 정보 변경 실패';
+		}
+	}
+		res.json(result);
+	});
 });
 
 router.get('/pushActionRegister.app', function(req, res, next) {
