@@ -9,14 +9,11 @@
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
-    "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "express-velocity": "^1.0.0",
     "gson": "^0.1.5",
-    "html": "^1.0.0",
+    "jade": "^1.11.0",
     "morgan": "~1.8.1",
     "mysql": "^2.14.1",
-    "serve-favicon": "~2.4.2",
-    "velocity": "^0.7.2"
+    "serve-favicon": "~2.4.2"
   }
 }
