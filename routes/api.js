@@ -181,7 +181,7 @@ router.get('/memberPwdConfirm.app', function(req, res, next) {
 
   var memberId = reqParam.memberId;
   var memberPwd = reqParam.memberPwd;
-  
+
   var sqlQueryParam = [memberId, memberPwd];
   var sqlQuery = "select count(*) from where member_id=? and member_pwd=?";
   connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
@@ -212,7 +212,7 @@ router.get('/memberPwdChange.app', function(req, res, next) {
   var memberId = reqParam.memberId;
   var memberPwd = reqParam.memberPwd;
   var memberChangePwd = reqParam.memberChangePwd;
-  
+
   var sqlQueryParam = [memberChangePwd, memberId, memberPwd];
   var sqlQuery = "update member set member_pwd=? where member_id=? and member_pwd=? ";
   connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
@@ -245,19 +245,19 @@ router.get('/memberProfileImageChange.app', function(req, res, next) {
 /* 완료 */
 router.get('/favoritesRegister.app', function(req, res, next) {
   	var reqParam = req.query;
-	
+
 	var memberId = reqParam.memberId;
 	var manageId = reqParam.manageId;
-	
+
 	console.log(memberId);
 	console.log(manageId);
 
 	var sqlQueryParam = [manageId,memberId];
 	var sqlQuery = "insert into favorites_info(manage_id, bookmark, member_id ) values(?, 'Y', ?)";
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
-		
+
 	var result = new Result();
-		
+
 	if(err){
 	  result.resultCode = '500';
       result.resultMessage = '시스템 관리자에게 문의 하세요';
@@ -266,10 +266,10 @@ router.get('/favoritesRegister.app', function(req, res, next) {
 	} else {
 
 		var result = new Result();
-		
-		
+
+
 		if(row.affectedRows === 1) {
-			
+
 			res.setHeader('Content-Type', 'application/json; charset=utf-8');
 			result.resultCode = '200';
 			result.resultMessage = '즐겨찾기 등록 되었습니다.';
@@ -288,24 +288,24 @@ router.get('/favoritesRegister.app', function(req, res, next) {
 /* 완료 */
 router.get('/favoritesList.app', function(req, res, next) {
   	var reqParam = req.query;
-	
+
 	var memberId = reqParam.memberId;
 	var manageType = reqParam.manageType;
-	
+
 	var sqlQueryParam = [memberId,manageType];
-	var sqlQuery = "select lm.manage_id manageId, " + 
-	"(select city_name from address_city where city_code=lm.city_code) cityName , " + 
+	var sqlQuery = "select lm.manage_id manageId, " +
+	"(select city_name from address_city where city_code=lm.city_code) cityName , " +
 	"(select state_name from address_state where state_code=lm.state_code) stateName " +
 	" from favorites_info fi right join location_management lm on fi.manage_id = lm.manage_id where fi.member_id=?";
 
 	if(manageType !== "all") {
 		sqlQuery += "and lm.manage_type=?";
 	}
-	
+
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
-				
+
 	var result = new Result();
-		
+
 	if(err){
 	  result.resultCode = '500';
       result.resultMessage = '시스템 관리자에게 문의 하세요';
@@ -314,7 +314,7 @@ router.get('/favoritesList.app', function(req, res, next) {
 
 		var result = new Result();
 		var dataLength = row.length;
-		
+
 		res.statusCode = "200";
 		res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
@@ -325,23 +325,23 @@ router.get('/favoritesList.app', function(req, res, next) {
 });
 
 router.get('/pushRecordList.app', function(req, res, next) {
-	
-	
+
+
     var reqParam = req.query;
-	
+
 	var memberId = reqParam.memberId;
-	
+
 	var sqlQueryParam = [memberId];
 	var sqlQuery = "select phi.sensor_id,phi.push_contents, phi.push_send_time, si.city_code, si.state_code "
-				+ "from push_history_info phi "
-				+ "join sensor_info si on phi.sensor_id = si.sensor_id "
-				+ "join member m on si.city_code = m.city_code "
-				+ "where m.member_id = ? ";
-	
+				        +"from push_history_info phi "
+				        +"join sensor_info si on phi.sensor_id = si.sensor_id "
+				        +"join member m on si.city_code = m.city_code "
+				        +"where m.member_id = ? ";
+
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
-				
+
 	var result = new Result();
-		
+
 	if(err){
 	  result.resultCode = '500';
       result.resultMessage = '시스템 관리자에게 문의 하세요';
@@ -349,7 +349,7 @@ router.get('/pushRecordList.app', function(req, res, next) {
 	} else {
 
 		var result = new Result();
-		
+
 		res.statusCode = "200";
 		res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
@@ -360,29 +360,29 @@ router.get('/pushRecordList.app', function(req, res, next) {
 });
 
 router.get('/sensorList.app', function(req, res, next) {
-	
+
 	var result = new Result();
 	var reqParam = req.query;
-	
+
 	var memberId = reqParam.memberId;
 	var manageType = reqParam.manageType;
-	
+
 	var sqlQueryParam = [memberId,manageType];
 	var sqlQuery = "select lm.manage_id,ac.city_name, ast.state_name  from member m "
-					+"join location_management lm on m.state_code=lm.state_code "
-					+"join address_city ac on m.city_code=ac.city_code "
-					+"join address_state ast on m.state_code=ast.state_code "
-					+"where m.member_id = ? and lm.manage_type=? "
-					
-	
+      					+"join location_management lm on m.state_code=lm.state_code "
+      					+"join address_city ac on m.city_code=ac.city_code "
+      					+"join address_state ast on m.state_code=ast.state_code "
+      					+"where m.member_id = ? and lm.manage_type=? "
+
+
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
-					
+
 	if(err){
 		console.log(err);
 		result.resultCode = '500';
 		result.resultMessage = '시스템 관리자에게 문의 하세요';
 		res.json(result);
-	} else {	
+	} else {
 		res.statusCode = "200";
 		res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
@@ -390,7 +390,7 @@ router.get('/sensorList.app', function(req, res, next) {
 		res.json(resultStr);
 	}
   });
-  
+
 });
 
 router.get('/wmInfo.app', function(req, res, next) {
@@ -412,7 +412,7 @@ router.get('/smInfo.app', function(req, res, next) {
 
 
 router.get('/sensorInfoRegister.app', function(req, res, next) {
-	
+
 	var reqParam = req.query;
 
 	var sensorId = reqParam.sensorId;
@@ -420,7 +420,7 @@ router.get('/sensorInfoRegister.app', function(req, res, next) {
 
 	var sqlQueryParam = [sensorInfo,sensorId];
 	var sqlQuery = "update sensor_info set sensor_info=? where sensor_id=?"
-	
+
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
 
 	var result = new Result();
@@ -449,7 +449,7 @@ router.get('/operationStatusRegister.app', function(req, res, next) {
 
 	var sqlQueryParam = [operationStatus,sensorId];
 	var sqlQuery = "update sensor_info set operation_status=? where sensor_id=?"
-	
+
 	connection.query(sqlQuery, sqlQueryParam, function (err, row, fields) {
 
 	var result = new Result();

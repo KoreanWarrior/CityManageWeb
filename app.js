@@ -4,16 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//var vm = require('express-velocity');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var test = require('./routes/api');
+var api = require('./routes/api');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+
+//app.engine(".vm", vm({
+//  root: __dirname + "/view"  //duplicated with views setting but required for velocity template
+//}));
+//app.set("views", __dirname + "/view");
 
 
 
@@ -27,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/api', test);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
