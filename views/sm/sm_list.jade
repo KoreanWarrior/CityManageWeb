@@ -1,61 +1,66 @@
 doctype html
 html(lang='en')
-    head
-        meta(charset='utf-8')
-        |     
-        meta(http-equiv='X-UA-Compatible', content='IE=edge')
-        |     
-        meta(name='viewport', content='width=device-width, initial-scale=1')
-        |     
-        meta(name='description', content='')
-        |     
-        meta(name='author', content='')
-        |     
-        title SB Admin 2 - Bootstrap Admin Theme
-        // Bootstrap Core CSS
-        link(href='../vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
-        // MetisMenu CSS
-        link(href='../vendor/metisMenu/metisMenu.min.css', rel='stylesheet')
-        // Custom CSS
-        link(href='../dist/css/sb-admin-2.css', rel='stylesheet')
-        // Morris Charts CSS
-        link(href='../vendor/morrisjs/morris.css', rel='stylesheet')
-        // Custom Fonts
-        link(href='../vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
-        // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-        // WARNING: Respond.js doesn't work if you view the page via file://
-        //if lt IE 9
-            script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
-            |         
-            script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
-    body
+        head
+                    meta(charset='utf-8')
+                    |     
+                    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+                    |     
+                    meta(name='viewport', content='width=device-width, initial-scale=1')
+                    |     
+                    meta(name='description', content='')
+                    |     
+                    meta(name='author', content='')
+                    |     
+                    title SB Admin 2 - Bootstrap Admin Theme
+                    // Bootstrap Core CSS
+                    link(href='../vendor/bootstrap/css/bootstrap.min.css', rel='stylesheet')
+                    // MetisMenu CSS
+                    link(href='../vendor/metisMenu/metisMenu.min.css', rel='stylesheet')
+                    // Custom CSS
+                    link(href='../dist/css/sb-admin-2.css', rel='stylesheet')
+                    // Morris Charts CSS
+                    link(href='../vendor/morrisjs/morris.css', rel='stylesheet')
+                    // Custom Fonts
+                    link(href='../vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+                    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+                    // WARNING: Respond.js doesn't work if you view the page via file://
+                    //if lt IE 9
+                        script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+                        |         
+                        script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+        body
         #wrapper
-            include ../common/header    
+            include ../common/header
             #page-wrapper
                 .row
                     .col-lg-12
                       // /.tab container
                       #exTab2.container(style="width:100%; top-margine:30px;")
                         ul.nav.nav-tabs
-                            li
+                            li.active
                                 a(href='/memberList') 회원관리
-                            | 			
+                            |           
                             li
                                 a(href='/tmList') 쓰레기통 관리
-                            | 			
+                            |           
                             li
                                 a(href='/wmList') 수질 관리
-                            | 			
+                            |           
                             li
                                 a(href='/gmList') 도시가스 관리
-                            | 			
-                            li.active
+                            |           
+                            li
                                 a(href='/smList') 금연구역 관리
-                            | 			
+                            |           
                             li
                                 a(href='pushList') PUSH이력 관리
-                                  
-                        // /.tab container
+                                
+                                //each item in pageData.name
+                                //span #{item}
+                        .tab-content.clearfix
+                        .tab-pane
+                            h3 Content's background color is the same for the tab
+                     // /.tab container
                 // /.row
             // /#page-wrapper
         // /#wrapper
