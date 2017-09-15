@@ -3,34 +3,23 @@ html
     head
         meta(http-equiv='Content-Type', content='text/html; charset = UTF-8')
         title 로그인
-        link(rel='stylesheet', type='text/css', href='../loginForm.css')
+        link(rel='stylesheet', type='text/css', href='../stylesheets/loginForm.css')
     body
         form(action='', method='post')
             h1 IoT System
-            |
             h2 종합 도시관리 시스템
-            |
             fieldset
                 .loginContainer
                     label
                         b 아이디
-                    |
                     input(type='text', placeholder='아이디를 입력해주세요.', name='memberId', maxlength='20', value='', required='')
-                    |
-                    |
                     label
                         b 비밀번호
-                    |
                     input(type='password', placeholder='비밀번호  입력해주세요.', name='memberPwd', maxlength='20', required='')
-                    |
-                    |
                     .btncenter
                         button(type='submit', value='signin') 로그인
-                    |
-                    |
                     .registerArticle
                         a(href='register.do') ★회원가입
-        |
         input#error(type='hidden', value='${error}')
 
         script(src='../../js/jquery-1.11.0.min.js')
@@ -38,6 +27,6 @@ html
           $(document).ready(function(){
             var err = $("#error").val();
             if(err > 0){
-            alert($("#error").val());
-          }
-        });
+              alert($("#error").val());
+            }
+          });

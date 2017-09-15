@@ -1,0 +1,56 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset = UTF-8')
+    title 회원가입
+    link(rel='stylesheet', type='text/css', href='../../css/textForm.css')
+  body
+    .formContainer
+      h2 회원 가입
+      form(action='register.do', method='post', enctype='multipart/form-data')
+        .container
+          #memberPhoto_preview.memberPhoto_preview
+            img(src='#', width='100%', height='100%', alt='프로필 이미지 선택')
+          label(for='memberPhoto')
+            b 프로필사진
+          input#memberPhoto(type='file', name='memberPhoto', maxlength='20', value='${param.memberPhoto}', required='')
+          label
+            b 아이디
+          input#memberId(type='text', placeholder='아이디를 입력해주세요.', name='memberId', maxlength='20', value='${param.memberId}', required='')
+          label
+            b 비밀번호
+          input#memberPwd(type='password', placeholder='비밀번호  입력해주세요.', name='memberPwd', maxlength='20', value='${param.memberPwd}', required='')
+          label
+            b 비밀번호 확인
+          input#conMemberPwd(type='password', placeholder='비밀번호 확인을 입력해주세요.', name='conMemberPwd', maxlength='20', required='')
+          label
+            b 이름
+          input#memberName(type='text', placeholder='이름을 입력해주세요.', name='memberName', maxlength='20', value='${param.memberName}', required='')
+          label
+            b 휴대폰 번호
+          input#memberPhone(type='text', placeholder='휴대폰 번호를 입력해주세요.', name='memberPhone', maxlength='20', value='${param.memberPhone}', required='')
+          label
+            b E-mail
+          input#memberEmail(type='email', placeholder='E-mail을 입력해주세요.', name='memberEmail', maxlength='20', value='${param.memberEmail}', required='')
+          label
+            b 지역 선택
+          select#city(name='cityCode')
+            c:foreach(var='cityInfo', items='${city}', varstatus='status')
+              option(value='${cityInfo.cityCode}') ${cityInfo.cityName}
+          .btncenter
+            button(type='submit', value='signup') 가입
+  script(src='../../js/jquery-1.11.0.min.js')
+  script(type='text/javascript').
+    jQuery('#memberPhoto').on('change', function () {
+    ext = jQuery(this).val().split('.').pop().toLowerCase();
+    if (jQuery.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+    resetFormElement(jQuery(this));
+    alert('Not an memberPhoto!');
+    } else {
+    file = jQuery('#memberPhoto').prop("files")[0];
+    blobURL = window.URL.createObjectURL(file);
+    jQuery('#memberPhoto_preview img').attr('src', blobURL);
+    //jQuery('#memberPhoto_preview').slideDown();
+    //jQuery(this).slideUp();
+    }
+    });
