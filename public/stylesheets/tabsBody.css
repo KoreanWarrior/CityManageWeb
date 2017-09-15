@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: Droid Sans Fallback;
+	background-color: #F2F2F2;
+}
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    height: 60px;
+    background-color: #00AABD;
+    border-radius: 4px;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: #00AABD;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    height: 50px;
+    width: 135px;
+    border-radius: 4px;
+    color: white;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #009499;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #00AAB0;
+}
+
+/* Style the tab content */
+.tabcontent {
+	background-color: #F2F2F2;
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.logoutArticle {
+	font-family: Droid Sans Fallback;
+	margin-top: 10px;
+	text-align: right;
+	margin-right: 20px;
+	font-size: 13px;
+}
+
+.SettringsArticle {
+	text-align: right; 
+	margin: 10px;
+	color: white;
+}

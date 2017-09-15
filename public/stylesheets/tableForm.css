@@ -1,0 +1,106 @@
+@CHARSET "UTF-8";
+
+body {
+	font-family: Droid Sans Fallback;
+	background-color: #F2F2F2;
+}
+
+h2 {
+	
+	margin-top: 30px;
+	color: #444444;
+	text-align: center;
+}
+
+label {
+	margin-top: 10px;
+	color : #444444;
+	margin-right: 10px;
+}
+
+div.allContainer {
+	width: 100%;
+}
+
+div.manageContainer {
+	text-align: right; 
+}
+div.manageContainer.button {
+	width: 100px;
+	height: 30px;
+}
+
+
+input[type=text], input[type=password], input[type=file], input[type=email], select {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #00AABD;
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+}
+
+/* Add a hover effect for buttons */
+button:hover, i:hover {
+	background-color: #009499;
+}
+
+
+/* Add a background color and some padding around the form */
+.container {
+	text-align: center;	
+	width: 1000px;
+	margin: 0 auto; 
+    padding: 0 auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.btncenter {
+ 	text-align: center;	
+}
+
+table {
+	font-family: Droid Sans Fallback;
+    border-collapse: collapse;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 50px;  
+}
+
+td, th {
+    border: 2px solid #00AABD;
+    text-align: left;
+    padding: 8px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #00AABD;
+}
+
+tr.memberList:hover, tr.wmSensorList:hover, tr.smSensorList:hover, tr.gmSensorList:hover, tr.tmSensorList:hover{
+	background-color:#8EE1DD
+	}
+	
+
+.SettringsArticle {
+	text-align: right; 
+	margin: 10px;
+	color: white;
+}

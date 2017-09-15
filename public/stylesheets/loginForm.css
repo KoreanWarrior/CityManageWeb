@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+/* Bordered form */
+h1 {
+	margin-top: 100px;
+	color: #1C9FE1;
+	font-size: 80px;
+	text-align: center;
+}
+h2 {
+	margin-top: -50px;
+	color: #9B9EA0;
+	font-size: 30px;
+	text-align: center;
+}
+body {
+	font-family: Droid Sans Fallback;
+	background-color: #F2F2F2;
+}
+
+form {
+    margin-top: 100px;
+    margin: 0 auto; 
+    padding: 0 auto;
+}
+
+label {
+	text-align: left;
+	margin-top: 10px;
+	color : #444444;
+}
+
+fieldset {
+	width: 350px;
+ 	border: 3px solid #1C9FE1; 
+    border-radius: 15px;
+    margin: 0 auto; 
+    padding: 0 auto;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;    
+}
+
+input[type=submit] {
+	text-align: center;
+}
+
+/* Set a style for all buttons */
+button {
+	position: center;
+    background-color: #00AABD;
+    color: white;
+    padding: 12px 20px;
+    margin: 10px 0; 
+   	margin-top: 30px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+	background-color: #009499;
+}
+
+/* Add padding to containers */
+.loginContainer {
+    padding: 16px;
+}
+.btncenter {
+ 	text-align: center;	
+}
+
+.registerArticle {
+	font-family: Droid Sans Fallback;
+	margin-top: 15px;
+ 	text-align: center;	
+ 	font-size: 13px;
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+}
